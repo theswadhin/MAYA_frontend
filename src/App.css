@@ -3,9 +3,12 @@
 @tailwind utilities;
 
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  margin: 0;         /* Remove centering */
+  padding: 0;        /* Remove padding */
+  width: 100%;       /* Ensure it takes full width */
+  height: 100vh;     /* Ensure it takes full height of the viewport */
+  display: flex;     /* This will ensure its children use flex layout */
+  flex-direction: column;
   text-align: center;
 }
 

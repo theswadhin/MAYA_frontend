@@ -1,17 +1,27 @@
 import { useState } from 'react'
 import Header from './header.jsx'
+import Footer from './footer.jsx';
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+const [count, setCount] = useState(0)
 
-  return (
-    <>
-      <Header />
-    </>
-  )
+return (
+  <div className="min-h-screen flex flex-col">
+    <Header />
+
+    <main className="flex-grow">
+    <div className="max-w-7xl mx-auto px-4">
+    {/* Page content */}
+    </div>
+</main>
+
+    <Footer />
+  </div>
+  
+)
 }
 
 export default App
