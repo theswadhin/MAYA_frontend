@@ -2,23 +2,34 @@ import React from "react";
 
 const Header = () => {
   return (
-    <header className="fixed top-0 left-0 w-full flex justify-between items-center px-8 py-2 shadow-md bg-white">
-      <div className="text-4xl font-bold text-teal-700 flex items-center space-x-2">
-        <div className="bg-teal-700 text-white rounded-lg flex items-center justify-center w-12 h-12 text-center">M</div>
-        <span className="text-black">MAYA</span>
-      </div>
+    <header className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
+                    <div className="flex items-center space-x-8">
+                        <div className="flex items-center">
+                            <div className="flex items-center justify-center w-10 h-10 rounded-md bg-teal-600 text-white font-bold text-xl">
+                                M
+                            </div>
+                            <span className="ml-2 font-bold text-xl text-gray-800">MAYA</span>
+                        </div>
+                        <nav className="hidden md:flex items-center space-x-6">
+                            <a href="#" className="text-gray-600 hover:text-gray-900 transition-colors">
+                                Features
+                            </a>
+                            <a href="#" className="text-teal-600 border-b-2 border-teal-600 font-medium pb-1">
+                                FB Optimizer
+                            </a>
+                            <a href="#" className="text-gray-600 hover:text-gray-900 transition-colors">
+                                About
+                            </a>
+                            <a href="#" className="text-gray-600 hover:text-gray-900 transition-colors">
+                                Contact
+                            </a>
+                        </nav>
+                    </div>
+                    <button className="px-5 py-2 rounded-md border border-teal-600 text-teal-800 hover:bg-teal-100 transition-colors">
+                        Login
+                    </button>
+                </header>
 
-      <nav className="space-x-6 hidden md:flex items-left">
-        <a href="#features" className="text-gray-700 hover:text-teal-700">Features</a>
-        <a href="#about" className="text-gray-700 hover:text-teal-700">About</a>
-        <a href="#pricing" className="text-gray-700 hover:text-teal-700">Pricing</a>
-        <a href="#contact" className="text-gray-700 hover:text-teal-700">Contact</a>
-      </nav>
-
-      <button className="flex border border-teal-700 text-teal-700 px-4 py-2 rounded hover:bg-teal-700 hover:text-white transition">
-        Login
-      </button>
-    </header>
   );
 };
 
