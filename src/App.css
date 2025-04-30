@@ -2,13 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-#root {
-  margin: 0;         /* Remove centering */
-  padding: 0;        /* Remove padding */
-  width: 100%;       /* Ensure it takes full width */
-  height: 100vh;     /* Ensure it takes full height of the viewport */
-  display: flex;     /* This will ensure its children use flex layout */
-  flex-direction: column;
+/* #root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
   text-align: center;
 }
 
@@ -19,10 +16,10 @@
   transition: filter 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em #27c84aaa);
 }
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  filter: drop-shadow(0 0 2em #6dac74aa);
 }
 
 @keyframes logo-spin {
@@ -45,5 +42,5 @@
 }
 
 .read-the-docs {
-  color: #888;
-}
+  color: #d8d7d7;
+} */

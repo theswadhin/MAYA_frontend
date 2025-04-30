@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Header from './header.jsx'
+import Home from './Home.jsx'
 import Footer from './footer.jsx';
 import { Component } from './components/ContentGenerationFlow.jsx';
 import reactLogo from './assets/react.svg'
@@ -16,6 +17,7 @@ return (
     <main className="flex-grow">
     <div className="max-w-7xl mx-auto px-4">
     {/* Page content */}
+    <Home />
     
     </div>
 </main>
