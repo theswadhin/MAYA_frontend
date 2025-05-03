@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -16,7 +17,7 @@ const Header = () => {
                             <a href="#feature" className="text-gray-600 hover:text-gray-900 transition-colors">
                                 Features
                             </a>
-                            <a href="#" className="text-gray-600 hover:text-gray-900 transition-colors">
+                            <a href="/ContentGenerationFlow" className="text-gray-600 hover:text-gray-900 transition-colors">
                                 FB Optimizer
                             </a>
                             <a href="#about" className="text-gray-600 hover:text-gray-900 transition-colors">
@@ -27,9 +28,12 @@ const Header = () => {
                             </a>
                         </nav>
                     </div>
+
+                    <Link to="/login">
                     <button className="md:flex px-5 py-2 rounded-md border border-teal-600 text-teal-800 hover:bg-teal-100 transition-colors">
                         Login
                     </button>
+                    </Link>
                 </header>
 
   );

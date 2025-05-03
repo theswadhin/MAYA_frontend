@@ -1,9 +1,9 @@
 import React from "react"
 
-export const Component = () => {
+export default function ContentGenenrationFlow ()  {
     return (
         <div id="webcrumbs">
-            <div className="min-h-screen bg-white font-sans lg:min-w-[1000px]">
+            <div className="min-h-screen bg-white font-sans lg:min-w-[1000px] pt-20">
                 {/* Header */}
                 
                 {/* Main Content */}
