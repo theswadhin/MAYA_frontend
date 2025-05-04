@@ -2,7 +2,9 @@ import { useState } from 'react'
 import Header from './header.jsx'
 import Home from './Home.jsx'
 import Footer from './footer.jsx';
-import { Component } from './components/ContentGenerationFlow.jsx';
+import ContentGenerationFlow from './ContentGenerationFlow.jsx';
+import Login  from './login.jsx';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -11,21 +13,25 @@ function App() {
 const [count, setCount] = useState(0)
 
 return (
-  <div className="min-h-screen flex flex-col">
-    <Header />
+  <Router>
+      <div className="flex flex-col min-h-screen">
+        {/* Header always visible */}
+        <Header />
 
-    <main className="flex-grow">
-    <div className="max-w-7xl mx-auto px-4">
-    {/* Page content */}
-    <Home />
-    
-    </div>
-</main>
-    <Component/>
-    <Footer />
-  </div>
-  
-)
+        {/* Main content */}
+        <main className="flex-grow">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/ContentGenerationFlow" element={<ContentGenerationFlow />} />
+          </Routes>
+        </main>
+
+        {/* Footer always visible */}
+        <Footer />
+      </div>
+    </Router>
+);
 }
 
 export default App

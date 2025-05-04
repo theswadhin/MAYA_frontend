@@ -1,20 +1,23 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
     <header className="fixed flex items-center justify-between px-6 py-4 border-b border-gray-100 shadow-md bg-white w-full">
                     <div className="flex items-center space-x-8">
-                        <div className="flex items-center">
+                    <a href="#home">
+                      <div className="flex items-center">
                             <div className="flex items-center justify-center w-10 h-10 rounded-md bg-teal-600 text-white font-bold text-xl">
                                 M
                             </div>
                             <span className="ml-2 font-bold text-xl text-gray-800">MAYA</span>
                         </div>
+                        </a>
                         <nav className="hidden md:flex items-center space-x-6">
                             <a href="#feature" className="text-gray-600 hover:text-gray-900 transition-colors">
                                 Features
                             </a>
-                            <a href="#" className="text-teal-600 border-b-2 border-teal-600 font-medium pb-1">
+                            <a href="/ContentGenerationFlow" className="text-gray-600 hover:text-gray-900 transition-colors">
                                 FB Optimizer
                             </a>
                             <a href="#about" className="text-gray-600 hover:text-gray-900 transition-colors">
@@ -25,9 +28,12 @@ const Header = () => {
                             </a>
                         </nav>
                     </div>
+
+                    <Link to="/login">
                     <button className="md:flex px-5 py-2 rounded-md border border-teal-600 text-teal-800 hover:bg-teal-100 transition-colors">
                         Login
                     </button>
+                    </Link>
                 </header>
 
   );
