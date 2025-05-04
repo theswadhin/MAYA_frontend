@@ -1,11 +1,41 @@
 import React from "react"
+import { useState } from 'react';
 
-export default function ContentGenenrationFlow ()  {
+export const Component = () => {
+        const [formData, setFormData] = useState({
+            postGoal: 'Engagement',
+            NicheIndustry: 'Business',
+            PostType: 'Video',
+            ToneStyle: 'Humorous',
+            ContentType: 'Evergreen',
+            CTA: 'Visit Website',
+            TargetAudiance: '18–24',
+        });
+    
+        const [dropdowns, setDropdowns] = useState({
+            postGoal: false,
+            NicheIndustry: false,
+            PostType: false,
+            ToneStyle: false,
+            ContentType: false,
+            CTA: false,
+            // you can add more dropdowns like contentType: false etc.
+        });
+    
+        const handleDropdownToggle = (field) => {
+            setDropdowns((prev) => ({ ...prev, [field]: !prev[field] }));
+        };
+    
+        const handleSelect = (field, value) => {
+            setFormData((prev) => ({ ...prev, [field]: value }));
+            setDropdowns((prev) => ({ ...prev, [field]: false }));
+        };
+
+
+
     return (
         <div id="webcrumbs">
-            <div className="min-h-screen bg-white font-sans lg:min-w-[1000px] pt-20">
-                {/* Header */}
-                
+            <div className="min-h-screen bg-white font-sans lg:min-w-[1000px]">    
                 {/* Main Content */}
                 <main className="max-w-5xl mx-auto px-4 py-8">
                     <div className="text-center mb-10">
@@ -40,32 +70,40 @@ export default function ContentGenenrationFlow ()  {
                             {/* Post Goal */}
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Post Goal</label>
-                                <details className="relative">
-                                    <summary className="flex items-center justify-between w-full p-3 bg-white border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50 transition-colors">
-                                        <span className="text-gray-800">Engagement</span>
-                                        <svg
-                                            className="w-5 h-5 text-gray-500"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            viewBox="0 0 24 24"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth="2"
-                                                d="M19 9l-7 7-7-7"
-                                            ></path>
-                                        </svg>
-                                    </summary>
+                                <div className="relative">
+                                 <button
+                                   onClick={() => handleDropdownToggle('postGoal')}
+                                   className="flex items-center justify-between w-full p-3 bg-white border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50">
+                                    <span className="text-gray-800">{formData.postGoal}</span>
+                                    <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
+                                        </button>  
+                        
+                                {dropdowns.postGoal && (
                                     <div className="absolute top-full left-0 z-10 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg">
                                         <ul className="py-1">
-                                            <li className="px-3 py-2 hover:bg-gray-100 cursor-pointer">Awareness</li>
-                                            <li className="px-3 py-2 hover:bg-gray-100 cursor-pointer">Engagement</li>
-                                            <li className="px-3 py-2 hover:bg-gray-100 cursor-pointer">Conversion</li>
-                                        </ul>
-                                    </div>
-                                </details>
+                                            {['Engagement', 
+                                              'Awareness',
+                                              'Lead Generation',
+                                              'Website Traffic', 
+                                              'Conversions', 
+                                              'Brand Loyalty', 
+                                              'Community Building', 
+                                              'Product Promotion', 
+                                              'Event Promotion'].map((goal) => (
+                                                <li
+                                                key={goal}
+                                                onClick={() => handleSelect('postGoal', goal)}
+                                                className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                                                >
+                                                    {goal}
+                                                                
+                                                </li>
+                                                ))} 
+                                        </ul>  
+                                    </div> )}
+
+                                </div>
                                 <p className="mt-1 text-xs text-gray-500">
                                     What do you want to achieve with this post?
                                 </p>
@@ -74,35 +112,45 @@ export default function ContentGenenrationFlow ()  {
                             {/* Niche/Industry */}
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Niche/Industry</label>
-                                <details className="relative">
-                                    <summary className="flex items-center justify-between w-full p-3 bg-white border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50 transition-colors">
-                                        <span className="text-gray-800">Business</span>
-                                        <svg
-                                            className="w-5 h-5 text-gray-500"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            viewBox="0 0 24 24"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth="2"
-                                                d="M19 9l-7 7-7-7"
-                                            ></path>
-                                        </svg>
-                                    </summary>
+                                <div className="relative">
+                                <button
+                                   onClick={() => handleDropdownToggle('NicheIndustry')}
+                                   className="flex items-center justify-between w-full p-3 bg-white border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50">
+                                    <span className="text-gray-800">{formData.NicheIndustry}</span>
+                                    <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
+                                        </button>  
+                                    {dropdowns.NicheIndustry && (
                                     <div className="absolute top-full left-0 z-10 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg">
                                         <ul className="py-1">
-                                            <li className="px-3 py-2 hover:bg-gray-100 cursor-pointer">Business</li>
-                                            <li className="px-3 py-2 hover:bg-gray-100 cursor-pointer">Technology</li>
-                                            <li className="px-3 py-2 hover:bg-gray-100 cursor-pointer">
-                                                Health & Wellness
-                                            </li>
-                                            <li className="px-3 py-2 hover:bg-gray-100 cursor-pointer">Education</li>
-                                        </ul>
-                                    </div>
-                                </details>
+                                            {['Business', 
+                                              'News', 
+                                              'Technology', 
+                                              'Lifestyle', 
+                                              'Health & Wellness', 
+                                              'Finance', 
+                                              'Education', 
+                                              'Travel', 
+                                              'Food & Beverage', 
+                                              'Sports', 
+                                              'Entertainment', 
+                                              'Real Estate', 
+                                              'Fashion & Beauty', 
+                                              'Parenting', 
+                                              'Non-Profit / Causes']
+                                                .map((goal) => (
+                                                <li
+                                                key={goal}
+                                                onClick={() => handleSelect('NicheIndustry', goal)}
+                                                className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                                                >
+                                                    {goal}
+                                                </li>
+                                                ))} 
+                                        </ul> 
+                                     </div> )}
+ 
+                                </div>
                                 <p className="mt-1 text-xs text-gray-500">
                                     Which industry does your content relate to?
                                 </p>
@@ -111,100 +159,108 @@ export default function ContentGenenrationFlow ()  {
                             {/* Post Type */}
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Post Type</label>
-                                <details className="relative">
-                                    <summary className="flex items-center justify-between w-full p-3 bg-white border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50 transition-colors">
-                                        <span className="text-gray-800">Video</span>
-                                        <svg
-                                            className="w-5 h-5 text-gray-500"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            viewBox="0 0 24 24"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth="2"
-                                                d="M19 9l-7 7-7-7"
-                                            ></path>
-                                        </svg>
-                                    </summary>
+                                <div className="relative">
+                                <button
+                                   onClick={() => handleDropdownToggle('PostType')}
+                                   className="flex items-center justify-between w-full p-3 bg-white border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50">
+                                    <span className="text-gray-800">{formData.PostType}</span>
+                                    <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
+                                        </button>  
+
+                                    {dropdowns.PostType && (
                                     <div className="absolute top-full left-0 z-10 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg">
                                         <ul className="py-1">
-                                            <li className="px-3 py-2 hover:bg-gray-100 cursor-pointer">Image Post</li>
-                                            <li className="px-3 py-2 hover:bg-gray-100 cursor-pointer">Video</li>
-                                            <li className="px-3 py-2 hover:bg-gray-100 cursor-pointer">Text Only</li>
-                                            <li className="px-3 py-2 hover:bg-gray-100 cursor-pointer">Link Post</li>
-                                        </ul>
-                                    </div>
-                                </details>
+                                            {['Text Post', 
+                                              'Image Post', 
+                                              'Video Post', 
+                                              'Story', 
+                                              'Live Stream', 
+                                              'Link Post', 
+                                              'Event', 
+                                              'Poll / Question'].map((goal) => (
+                                                <li
+                                                key={goal}
+                                                onClick={() => handleSelect('PostType', goal)}
+                                                className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                                                >
+                                                    {goal}
+                                                </li>
+                                                ))} 
+                                        </ul> 
+                                     </div> )}
+ 
+                                </div>
                                 <p className="mt-1 text-xs text-gray-500">What format will your post take?</p>
                             </div>
 
                             {/* Tone & Style */}
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Tone & Style</label>
-                                <details className="relative">
-                                    <summary className="flex items-center justify-between w-full p-3 bg-white border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50 transition-colors">
-                                        <span className="text-gray-800">Humorous</span>
-                                        <svg
-                                            className="w-5 h-5 text-gray-500"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            viewBox="0 0 24 24"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth="2"
-                                                d="M19 9l-7 7-7-7"
-                                            ></path>
-                                        </svg>
-                                    </summary>
+                                <div className="relative">
+                                <button
+                                   onClick={() => handleDropdownToggle('ToneStyle')}
+                                   className="flex items-center justify-between w-full p-3 bg-white border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50">
+                                    <span className="text-gray-800">{formData.ToneStyle}</span>
+                                    <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
+                                        </button>  
+
+                                    {dropdowns.ToneStyle && (
                                     <div className="absolute top-full left-0 z-10 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg">
                                         <ul className="py-1">
-                                            <li className="px-3 py-2 hover:bg-gray-100 cursor-pointer">Professional</li>
-                                            <li className="px-3 py-2 hover:bg-gray-100 cursor-pointer">Casual</li>
-                                            <li className="px-3 py-2 hover:bg-gray-100 cursor-pointer">Humorous</li>
-                                            <li className="px-3 py-2 hover:bg-gray-100 cursor-pointer">
-                                                Inspirational
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </details>
+                                            {['Informative', 
+                                              'Emotional', 
+                                              'Storytelling', 
+                                              'Relatable', 
+                                              'Funny', 
+                                              'Professional', 
+                                              'Casual', 
+                                              'Inspirational'].map((goal) => (
+                                                <li
+                                                key={goal}
+                                                onClick={() => handleSelect('ToneStyle', goal)}
+                                                className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                                                >
+                                                    {goal}
+                                                </li>
+                                                ))} 
+                                        </ul> 
+                                     </div> )}
+ 
+                                </div>
                                 <p className="mt-1 text-xs text-gray-500">What tone should your content have?</p>
                             </div>
 
                             {/* Content Type */}
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Content Type</label>
-                                <details className="relative">
-                                    <summary className="flex items-center justify-between w-full p-3 bg-white border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50 transition-colors">
-                                        <span className="text-gray-800">Evergreen</span>
-                                        <svg
-                                            className="w-5 h-5 text-gray-500"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            viewBox="0 0 24 24"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth="2"
-                                                d="M19 9l-7 7-7-7"
-                                            ></path>
-                                        </svg>
-                                    </summary>
+                                <div className="relative">
+                                <button
+                                   onClick={() => handleDropdownToggle('ContentType')}
+                                   className="flex items-center justify-between w-full p-3 bg-white border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50">
+                                    <span className="text-gray-800">{formData.ContentType}</span>
+                                    <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
+                                        </button>  
+
+                                    {dropdowns.ContentType && (
                                     <div className="absolute top-full left-0 z-10 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg">
                                         <ul className="py-1">
-                                            <li className="px-3 py-2 hover:bg-gray-100 cursor-pointer">Trending</li>
-                                            <li className="px-3 py-2 hover:bg-gray-100 cursor-pointer">Evergreen</li>
-                                            <li className="px-3 py-2 hover:bg-gray-100 cursor-pointer">Seasonal</li>
-                                        </ul>
-                                    </div>
-                                </details>
+                                            {['Trending', 
+                                              'Evergreen'].map((goal) => (
+                                                <li
+                                                key={goal}
+                                                onClick={() => handleSelect('ContentType', goal)}
+                                                className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                                                >
+                                                    {goal}
+                                                </li>
+                                                ))} 
+                                        </ul> 
+                                     </div> )}
+ 
+                                </div>
                                 <p className="mt-1 text-xs text-gray-500">
                                     Trending (news-based) or Evergreen (timeless) content?
                                 </p>
@@ -215,46 +271,80 @@ export default function ContentGenenrationFlow ()  {
                                 <label className="block text-sm font-medium text-gray-700 mb-1">
                                     Call-to-Action (CTA)
                                 </label>
-                                <details className="relative">
-                                    <summary className="flex items-center justify-between w-full p-3 bg-white border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50 transition-colors">
-                                        <span className="text-gray-800">Visit Website</span>
-                                        <svg
-                                            className="w-5 h-5 text-gray-500"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            viewBox="0 0 24 24"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth="2"
-                                                d="M19 9l-7 7-7-7"
-                                            ></path>
-                                        </svg>
-                                    </summary>
+                                <div className="relative">
+                                <button
+                                   onClick={() => handleDropdownToggle('CTA')}
+                                   className="flex items-center justify-between w-full p-3 bg-white border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50">
+                                    <span className="text-gray-800">{formData.CTA}</span>
+                                    <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
+                                        </button>  
+
+                                    {dropdowns.CTA && (
                                     <div className="absolute top-full left-0 z-10 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg">
                                         <ul className="py-1">
-                                            <li className="px-3 py-2 hover:bg-gray-100 cursor-pointer">Learn More</li>
-                                            <li className="px-3 py-2 hover:bg-gray-100 cursor-pointer">Shop Now</li>
-                                            <li className="px-3 py-2 hover:bg-gray-100 cursor-pointer">Sign Up</li>
-                                            <li className="px-3 py-2 hover:bg-gray-100 cursor-pointer">
-                                                Visit Website
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </details>
+                                            {['Like', 
+                                              'Share', 
+                                              'Comment', 
+                                              'Visit Website', 
+                                              'Join Group', 
+                                              'Sign Up', 
+                                              'Send Message', 
+                                              'Learn More', 
+                                              'Shop Now', 
+                                              'Watch More', 
+                                              'RSVP'].map((goal) => (
+                                                <li
+                                                key={goal}
+                                                onClick={() => handleSelect('CTA', goal)}
+                                                className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                                                >
+                                                    {goal}
+                                                </li>
+                                                ))} 
+                                        </ul> 
+                                     </div> )}
+ 
+                                </div>
                                 <p className="mt-1 text-xs text-gray-500">What action do you want users to take?</p>
                             </div>
 
                             {/* Target Audience */}
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Target Audience</label>
-                                <input
-                                    type="text"
-                                    className="w-full p-3 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
-                                    value="25-50"
-                                />
+                                <div className="relative">
+                                <button
+                                   onClick={() => handleDropdownToggle('TargetAudiance')}
+                                   className="flex items-center justify-between w-full p-3 bg-white border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50">
+                                    <span className="text-gray-800">{formData.TargetAudiance}</span>
+                                    <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
+                                        </button>  
+
+                                    {dropdowns.TargetAudiance && (
+                                    <div className="absolute top-full left-0 z-10 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg">
+                                        <ul className="py-1">
+                                            {[
+                                                "13–17",
+                                                "18–24",
+                                                "25–34",
+                                                "35–44",
+                                                "45–54",
+                                                "55–64",
+                                                "65+"
+                                            ].map((goal) => (
+                                                <li
+                                                key={goal}
+                                                onClick={() => handleSelect('TargetAudiance', goal)}
+                                                className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                                                >
+                                                    {goal}
+                                                </li>
+                                                ))} 
+                                        </ul> 
+                                     </div> )}
+ 
+                                </div>
                                 <p className="mt-1 text-xs text-gray-500">
                                     Who are you trying to reach with this post?
                                 </p>

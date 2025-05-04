@@ -17,7 +17,7 @@ const Header = () => {
                             <a href="#feature" className="text-gray-600 hover:text-gray-900 transition-colors">
                                 Features
                             </a>
-                            <a href="/ContentGenerationFlow" className="text-gray-600 hover:text-gray-900 transition-colors">
+                            <a href="#" className="text-gray-600  hover:text-gray-900 transition-colors">
                                 FB Optimizer
                             </a>
                             <a href="#about" className="text-gray-600 hover:text-gray-900 transition-colors">
