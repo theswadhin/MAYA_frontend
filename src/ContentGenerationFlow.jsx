@@ -1,7 +1,7 @@
 import React from "react"
 import { useState } from 'react';
 
-export const Component = () => {
+export default function ContentGenenrationFlow(){
         const [formData, setFormData] = useState({
             postGoal: 'Engagement',
             NicheIndustry: 'Business',
@@ -34,8 +34,8 @@ export const Component = () => {
 
 
     return (
-        <div id="webcrumbs">
-            <div className="min-h-screen bg-white font-sans lg:min-w-[1000px]">    
+        <div id="webcrumbs ">
+            <div className="min-h-screen bg-white font-sans lg:min-w-[1000px] pt-16">    
                 {/* Main Content */}
                 <main className="max-w-5xl mx-auto px-4 py-8">
                     <div className="text-center mb-10">
