@@ -33,7 +33,7 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section id="feature" className="pt-24 flex flex-col items-center w-full max-w-5xl text-center space-y-12">
+      <section id="features" className="pt-24 flex flex-col items-center w-full max-w-5xl text-center space-y-12">
         <div>
           <h3 className="text-teal-600 font-semibold">FEATURES</h3>
           <h2 className="text-3xl md:text-4xl font-bold mt-2 text-black">
