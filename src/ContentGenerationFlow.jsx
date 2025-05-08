@@ -34,14 +34,18 @@ export default function ContentGenenrationFlow(){
 
 
     return (
-        <div id="webcrumbs ">
+        <div id="ContentGenerationFlow">
             <div className="min-h-screen bg-white font-sans lg:min-w-[1000px] pt-16">    
                 {/* Main Content */}
                 <main className="max-w-5xl mx-auto px-4 py-8">
                     <div className="text-center mb-10">
                         <h1 className="text-4xl font-bold mb-2">
                             <span className="text-teal-600">Facebook Post</span>{" "}
-                            <span className="text-teal-400">Optimizer</span>
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-300">
+                                Optimizer
+                            </span>
+
+
                             {/* Next: "Add animated underline effect on hover" */}
                         </h1>
                         <p className="text-gray-600 max-w-2xl mx-auto">

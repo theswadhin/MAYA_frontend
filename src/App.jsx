@@ -3,6 +3,7 @@ import Header from './header.jsx'
 import Home from './Home.jsx'
 import Footer from './footer.jsx';
 import ContentGenerationFlow from './ContentGenerationFlow.jsx';
+import UserAccountMgnt from './UserAccountMgnt.jsx';
 import Login  from './login.jsx';
 import Register from './register.jsx';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -26,9 +27,9 @@ return (
             <Route path="/login" element={<Login />} />
             <Route path="/ContentGenerationFlow" element={<ContentGenerationFlow />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/UserAccountMgnt" element={<UserAccountMgnt />} />
           </Routes>
         </main>
-
         {/* Footer always visible */}
         <Footer />
       </div>

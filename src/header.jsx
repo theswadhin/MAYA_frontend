@@ -1,8 +1,10 @@
-import React from "react";
+import React,useState from "react";
+
 import { Link,useNavigate } from "react-router-dom";
 
 const Header = () => {
   const navigate = useNavigate();
+   const [isOpen, setIsOpen] = useState(false);
 
   const goToFeatures = () => {
     navigate("/", { state: { scrollTo: "features" } });
@@ -13,7 +15,7 @@ const Header = () => {
   const goToContact = () => {
     navigate("/", { state: { scrollTo: "contact" } });
   }
-
+  
   return (
     <header className="fixed flex z-20 items-center justify-between px-6 py-4 border-b border-gray-100 shadow-md bg-white w-full">
                     <div className="flex items-center space-x-8">
@@ -30,14 +32,55 @@ const Header = () => {
                             <a href="#features" onClick={goToFeatures} className="text-gray-600 hover:text-gray-900 transition-colors">
                                 Features
                             </a>
+
                             <a href="/ContentGenerationFlow" className="text-gray-600  hover:text-gray-900 transition-colors">
                                 FB Optimizer
                             </a>
                             <a href="#about" onClick={goToAbout} className="text-gray-600 hover:text-gray-900 transition-colors">
+
+
+                            <div className="relative">
+                                      <button
+                                        onClick={() => setIsOpen((prev) => !prev)}
+                                        className="text-gray-600 hover:text-gray-900 transition-colors flex items-center"
+                                      >
+                                        AI Content Lab                                        
+                                      </button>
+
+                                      {isOpen && (
+                                        <div className="absolute left-0 top-full mt-2 w-48 bg-white shadow-lg rounded-md z-10 flex flex-col">
+                                          <Link to="/ContentGenerationFlow"
+                                            className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                                            onClick={() => setIsOpen(false)} // close dropdown after click
+                                          >
+                                            Facebook Optimizer
+                                          </Link>
+                                          <Link to="/ContentGenerationFlow"
+                                            className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                                            onClick={() => setIsOpen(false)}
+                                          >
+                                            Instagram Optimizer
+                                          </Link>
+                                          <Link to="/ContentGenerationFlow"
+                                            className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                                            onClick={() => setIsOpen(false)}
+                                          >
+                                            Snapchat Optimizer
+                                          </Link>
+                                        </div>
+                                      )}
+                                    </div>
+
+                            
+                            <a href="#about" className="text-gray-600 hover:text-gray-900 transition-colors">
+
                                 About
                             </a>
                             <a href="#contact" onClick={goToContact} className="text-gray-600 hover:text-gray-900 transition-colors">
                                 Contact
+                            </a>
+                            <a href="/UserAccountMgnt" className="text-gray-600 hover:text-gray-900 transition-colors">
+                                Account
                             </a>
                         </nav>
                     </div>
