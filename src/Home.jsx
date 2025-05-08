@@ -5,7 +5,7 @@ export default function Home() {
     <div id="home" className="pt-24 flex flex-col items-center px-6 py-12 space-y-24">
       {/* main Section */}
       <section className="flex flex-col md:flex-row items-center justify-between w-full max-w-7xl">
-        <div className="flex-1 space-y-6">
+        <div className="flex-1 space-y-6 mr-24">
           <h1 className="text-4xl md:text-6xl font-bold text-black">
             Meet <span className="text-black">MAYA</span>, Your <br /> <span className="text-teal-600">Personal Assistant</span>
           </h1>
@@ -23,7 +23,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="flex-1 mt-10 md:mt-0">
+        <div className="flex-1 mt-10 ml-24 md:mt-0">
           <img
             src="/mayadashboard.jpg"
             alt="Dashboard Screenshot"
@@ -33,7 +33,7 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section id="feature" className="pt-24 flex flex-col items-center w-full max-w-5xl text-center space-y-12">
+      <section id="features" className="pt-24 flex flex-col items-center w-full max-w-5xl text-center space-y-12">
         <div>
           <h3 className="text-teal-600 font-semibold">FEATURES</h3>
           <h2 className="text-3xl md:text-4xl font-bold mt-2 text-black">

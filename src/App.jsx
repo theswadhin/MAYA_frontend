@@ -5,6 +5,7 @@ import Footer from './footer.jsx';
 import ContentGenerationFlow from './ContentGenerationFlow.jsx';
 import UserAccountMgnt from './UserAccountMgnt.jsx';
 import Login  from './login.jsx';
+import Register from './register.jsx';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
@@ -25,6 +26,7 @@ return (
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/ContentGenerationFlow" element={<ContentGenerationFlow />} />
+            <Route path="/register" element={<Register />} />
             <Route path="/UserAccountMgnt" element={<UserAccountMgnt />} />
           </Routes>
         </main>
