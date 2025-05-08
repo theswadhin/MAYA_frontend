@@ -1,4 +1,4 @@
-import React,useState from "react";
+import {React,useState} from "react";
 
 import { Link,useNavigate } from "react-router-dom";
 
@@ -28,22 +28,19 @@ const Header = () => {
                         </div>
                         </a>
 
-                        <nav className="hidden md:flex items-center space-x-6">
+                        <nav className="hidden md:flex items-center space-x-5">
                             <a href="#features" onClick={goToFeatures} className="text-gray-600 hover:text-gray-900 transition-colors">
                                 Features
                             </a>
 
-                            <a href="/ContentGenerationFlow" className="text-gray-600  hover:text-gray-900 transition-colors">
-                                FB Optimizer
-                            </a>
                             <a href="#about" onClick={goToAbout} className="text-gray-600 hover:text-gray-900 transition-colors">
-
+                              About 
+                            </a>
 
                             <div className="relative">
                                       <button
                                         onClick={() => setIsOpen((prev) => !prev)}
-                                        className="text-gray-600 hover:text-gray-900 transition-colors flex items-center"
-                                      >
+                                        className="text-gray-600 hover:text-gray-900 transition-colors">
                                         AI Content Lab                                        
                                       </button>
 
@@ -72,10 +69,6 @@ const Header = () => {
                                     </div>
 
                             
-                            <a href="#about" className="text-gray-600 hover:text-gray-900 transition-colors">
-
-                                About
-                            </a>
                             <a href="#contact" onClick={goToContact} className="text-gray-600 hover:text-gray-900 transition-colors">
                                 Contact
                             </a>
