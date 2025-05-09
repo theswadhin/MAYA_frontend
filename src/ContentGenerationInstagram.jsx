@@ -1,23 +1,23 @@
 import React from "react"
 import { useState } from 'react';
 
-export default function ContentGenenrationFlow(){
+export default function ContentGenerationInstagram(){
         const [formData, setFormData] = useState({
-            postGoal: 'Engagement',
-            NicheIndustry: 'Business',
-            PostType: 'Video',
-            ToneStyle: 'Humorous',
-            ContentType: 'Evergreen',
-            CTA: 'Visit Website',
-            TargetAudiance: '18–24',
+            ContentGoal: 'Engagement',
+            NicheIndustry: 'Lifestyle',
+            ContentType: 'Reel',
+            ToneStyle: 'Entertaining',
+            TrendingorEvergreen: 'Evergreen',
+            CTA: 'Follow',
+            TargetAudiance: 'Young Adults (20-29)',
         });
     
         const [dropdowns, setDropdowns] = useState({
-            postGoal: false,
+            ContentGoal: false,
             NicheIndustry: false,
-            PostType: false,
-            ToneStyle: false,
             ContentType: false,
+            ToneStyle: false,
+            TrendingorEvergreen: false,
             CTA: false,
             TargetAudiance: false,
             // you can add more dropdowns like contentType: false etc.
@@ -35,22 +35,23 @@ export default function ContentGenenrationFlow(){
 
 
     return (
-        <div id="ContentGenerationFlow">
+        <div id="ContentGenerationInstagram">
             <div className="min-h-screen bg-white font-sans lg:min-w-[1000px] pt-16">    
                 {/* Main Content */}
                 <main className="max-w-5xl mx-auto px-4 py-8">
                     <div className="text-center mb-10">
                         <h1 className="text-4xl font-bold mb-2">
-                            <span className="text-teal-600">Facebook Post</span>{" "}
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-300">
+                            <span className="text-teal-600">Instagram Post</span>{" "}
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-600">
                                 Optimizer
                             </span>
+
 
 
                             {/* Next: "Add animated underline effect on hover" */}
                         </h1>
                         <p className="text-gray-600 max-w-2xl mx-auto">
-                            Create highly effective Facebook posts tailored to your specific needs and audience.
+                            Create highly effective Instagram  posts tailored to your specific needs and audience.
                         </p>
                     </div>
 
@@ -68,37 +69,34 @@ export default function ContentGenenrationFlow(){
                     <div className="bg-white border border-gray-200 rounded-md p-6 mb-8">
                         <h2 className="text-xl font-bold mb-2">Enter Your Parameters</h2>
                         <p className="text-gray-600 text-sm mb-6">
-                            Fill in the details below to get customized Facebook post recommendations.
+                            Fill in the details below to get customized Instagram post recommendations.
                         </p>
 
                         <div className="grid md:grid-cols-2 gap-6">
-                            {/* Post Goal */}
+                            {/* Content Goal */}
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Post Goal</label>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Content Goal</label>
                                 <div className="relative">
                                  <button
-                                   onClick={() => handleDropdownToggle('postGoal')}
+                                   onClick={() => handleDropdownToggle('ContentGoal')}
                                    className="flex items-center justify-between w-full p-3 bg-white border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50">
-                                    <span className="text-gray-800">{formData.postGoal}</span>
+                                    <span className="text-gray-800">{formData.ContentGoal}</span>
                                     <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
                                         </button>  
                         
-                                {dropdowns.postGoal && (
+                                {dropdowns.ContentGoal && (
                                     <div className="absolute top-full left-0 z-10 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg">
                                         <ul className="py-1">
-                                            {['Engagement', 
-                                              'Awareness',
-                                              'Lead Generation',
-                                              'Website Traffic', 
-                                              'Conversions', 
-                                              'Brand Loyalty', 
+                                            {['Engagement',
+                                              'Brand Awareness', 
+                                              'Sales', 
+                                              'Follower Growth', 
                                               'Community Building', 
-                                              'Product Promotion', 
-                                              'Event Promotion'].map((goal) => (
+                                              'Website Traffic'].map((goal) => (
                                                 <li
                                                 key={goal}
-                                                onClick={() => handleSelect('postGoal', goal)}
+                                                onClick={() => handleSelect('ContentGoal', goal)}
                                                 className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
                                                 >
                                                     {goal}
@@ -128,22 +126,17 @@ export default function ContentGenenrationFlow(){
                                     {dropdowns.NicheIndustry && (
                                     <div className="absolute top-full left-0 z-10 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg">
                                         <ul className="py-1">
-                                            {['Business', 
-                                              'News', 
+                                            {['Fitness', 
+                                              'Fashion', 
+                                              'Beauty', 
                                               'Technology', 
+                                              'Food', 'Travel', 
                                               'Lifestyle', 
                                               'Health & Wellness', 
+                                              'Parenting', 
                                               'Finance', 
                                               'Education', 
-                                              'Travel', 
-                                              'Food & Beverage', 
-                                              'Sports', 
-                                              'Entertainment', 
-                                              'Real Estate', 
-                                              'Fashion & Beauty', 
-                                              'Parenting', 
-                                              'Non-Profit / Causes']
-                                                .map((goal) => (
+                                              'Photography'].map((goal) => (
                                                 <li
                                                 key={goal}
                                                 onClick={() => handleSelect('NicheIndustry', goal)}
@@ -161,32 +154,31 @@ export default function ContentGenenrationFlow(){
                                 </p>
                             </div>
 
-                            {/* Post Type */}
+                            {/* Content Type */}
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Post Type</label>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Content Type</label>
                                 <div className="relative">
                                 <button
-                                   onClick={() => handleDropdownToggle('PostType')}
+                                   onClick={() => handleDropdownToggle('ContentType')}
                                    className="flex items-center justify-between w-full p-3 bg-white border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50">
-                                    <span className="text-gray-800">{formData.PostType}</span>
+                                    <span className="text-gray-800">{formData.ContentType}</span>
                                     <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
                                         </button>  
 
-                                    {dropdowns.PostType && (
+                                    {dropdowns.ContentType && (
                                     <div className="absolute top-full left-0 z-10 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg">
                                         <ul className="py-1">
-                                            {['Text Post', 
-                                              'Image Post', 
-                                              'Video Post', 
+                                            {['Reel', 
+                                              'Carousel', 
+                                              'Single Image', 
                                               'Story', 
-                                              'Live Stream', 
-                                              'Link Post', 
-                                              'Event', 
-                                              'Poll / Question'].map((goal) => (
+                                              'Instagram Live', 
+                                              'Instagram Guide', 
+                                              'Collab Post'].map((goal) => (
                                                 <li
                                                 key={goal}
-                                                onClick={() => handleSelect('PostType', goal)}
+                                                onClick={() => handleSelect('ContentType', goal)}
                                                 className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
                                                 >
                                                     {goal}
@@ -215,13 +207,14 @@ export default function ContentGenenrationFlow(){
                                     <div className="absolute top-full left-0 z-10 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg">
                                         <ul className="py-1">
                                             {['Informative', 
-                                              'Emotional', 
-                                              'Storytelling', 
-                                              'Relatable', 
-                                              'Funny', 
+                                              'Entertaining', 
+                                              'Aesthetic', 
                                               'Professional', 
-                                              'Casual', 
-                                              'Inspirational'].map((goal) => (
+                                              'Inspirational', 
+                                              'Casual & Relatable', 
+                                              'Trendy', 
+                                              'Minimalist', 
+                                              'Bold & Colorful'].map((goal) => (
                                                 <li
                                                 key={goal}
                                                 onClick={() => handleSelect('ToneStyle', goal)}
@@ -237,19 +230,19 @@ export default function ContentGenenrationFlow(){
                                 <p className="mt-1 text-xs text-gray-500">What tone should your content have?</p>
                             </div>
 
-                            {/* Content Type */}
+                            {/* TrendingorEvergreen */}
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Content Type</label>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Trending or Evergreen</label>
                                 <div className="relative">
                                 <button
-                                   onClick={() => handleDropdownToggle('ContentType')}
+                                   onClick={() => handleDropdownToggle('TrendingorEvergreen')}
                                    className="flex items-center justify-between w-full p-3 bg-white border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50">
-                                    <span className="text-gray-800">{formData.ContentType}</span>
+                                    <span className="text-gray-800">{formData.TrendingorEvergreen}</span>
                                     <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
                                         </button>  
 
-                                    {dropdowns.ContentType && (
+                                    {dropdowns.TrendingorEvergreen && (
                                     <div className="absolute top-full left-0 z-10 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg">
                                         <ul className="py-1">
                                             {['Trending', 
@@ -257,7 +250,7 @@ export default function ContentGenenrationFlow(){
                                               'Mix of Both Trending and Evergreen'].map((goal) => (
                                                 <li
                                                 key={goal}
-                                                onClick={() => handleSelect('ContentType', goal)}
+                                                onClick={() => handleSelect('TrendingorEvergreen', goal)}
                                                 className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
                                                 >
                                                     {goal}
@@ -289,17 +282,16 @@ export default function ContentGenenrationFlow(){
                                     {dropdowns.CTA && (
                                     <div className="absolute top-full left-0 z-10 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg">
                                         <ul className="py-1">
-                                            {['Like', 
-                                              'Share', 
+                                            {['Follow', 
+                                              'Like', 
                                               'Comment', 
+                                              'Share', 
+                                              'Tag a Friend', 
+                                              'Save this Post', 
                                               'Visit Website', 
-                                              'Join Group', 
-                                              'Sign Up', 
-                                              'Send Message', 
-                                              'Learn More', 
+                                              'DM for More Info', 
                                               'Shop Now', 
-                                              'Watch More', 
-                                              'RSVP'].map((goal) => (
+                                              'Swipe Up (for Story)'].map((goal) => (
                                                 <li
                                                 key={goal}
                                                 onClick={() => handleSelect('CTA', goal)}
@@ -346,7 +338,8 @@ export default function ContentGenenrationFlow(){
                                                 'Tech Lovers',
                                                 'Fashion Enthusiasts',
                                                 'Foodies'
-                                                ].map((goal) => (
+                                                ]
+                                                .map((goal) => (
                                                 <li
                                                 key={goal}
                                                 onClick={() => handleSelect('TargetAudiance', goal)}

@@ -3,6 +3,11 @@ import Header from './header.jsx'
 import Home from './Home.jsx'
 import Footer from './footer.jsx';
 import ContentGenerationFlow from './ContentGenerationFlow.jsx';
+import ContentGenerationInstagram from './ContentGenerationInstagram.jsx';
+import ContentGenerationSnapchat from './ContentGenerationSnapchat.jsx';
+import ContentGenerationYouTube from './ContentGenerationYouTube.jsx';
+import ContentGenerationTikTok from './ContentGenerationTikTok.jsx';
+import ContentGenerationPinterest from './ContentGenerationPinterest.jsx';
 import UserAccountMgnt from './UserAccountMgnt.jsx';
 import Login  from './login.jsx';
 import Register from './register.jsx';
@@ -26,6 +31,11 @@ return (
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/ContentGenerationFlow" element={<ContentGenerationFlow />} />
+            <Route path="/ContentGenerationInstagram" element={<ContentGenerationInstagram />} />
+            <Route path="/ContentGenerationSnapchat" element={<ContentGenerationSnapchat />} />
+            <Route path="/ContentGenerationYouTube" element={<ContentGenerationYouTube />} />
+            <Route path="/ContentGenerationTikTok" element={<ContentGenerationTikTok />} />
+            <Route path="/ContentGenerationPinterest" element={<ContentGenerationPinterest />} />
             <Route path="/register" element={<Register />} />
             <Route path="/UserAccountMgnt" element={<UserAccountMgnt />} />
           </Routes>

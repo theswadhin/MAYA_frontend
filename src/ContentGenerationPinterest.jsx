@@ -1,25 +1,25 @@
 import React from "react"
 import { useState } from 'react';
 
-export default function ContentGenenrationFlow(){
+export default function ContentGenerationPinterest(){
         const [formData, setFormData] = useState({
-            postGoal: 'Engagement',
-            NicheIndustry: 'Business',
-            PostType: 'Video',
-            ToneStyle: 'Humorous',
+            PinGoal: 'Drive Website Traffic',
+            NicheIndustry: 'DIY & Crafts',
+            PinType: 'Single Image Pin',
+            ToneStyle: 'Clean & Aesthetic',
             ContentType: 'Evergreen',
-            CTA: 'Visit Website',
-            TargetAudiance: '18–24',
+            CTA: 'Save This Idea',
+            TargetAudiance: 'Millennial Women (25–40)',
         });
     
         const [dropdowns, setDropdowns] = useState({
-            postGoal: false,
+            PinGoal: false,
             NicheIndustry: false,
-            PostType: false,
+            PinType: false,
             ToneStyle: false,
             ContentType: false,
             CTA: false,
-            TargetAudiance: false,
+            TargetAudiance: false,           
             // you can add more dropdowns like contentType: false etc.
         });
     
@@ -35,22 +35,23 @@ export default function ContentGenenrationFlow(){
 
 
     return (
-        <div id="ContentGenerationFlow">
+        <div id="ContentGenerationPinterest">
             <div className="min-h-screen bg-white font-sans lg:min-w-[1000px] pt-16">    
                 {/* Main Content */}
                 <main className="max-w-5xl mx-auto px-4 py-8">
                     <div className="text-center mb-10">
                         <h1 className="text-4xl font-bold mb-2">
-                            <span className="text-teal-600">Facebook Post</span>{" "}
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-300">
-                                Optimizer
-                            </span>
+                            <span className="text-teal-600">Pinterest Post</span>{" "}
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 via-pink-400 to-rose-300">
+  Optimizer
+</span>
+
 
 
                             {/* Next: "Add animated underline effect on hover" */}
                         </h1>
                         <p className="text-gray-600 max-w-2xl mx-auto">
-                            Create highly effective Facebook posts tailored to your specific needs and audience.
+                            Create highly effective Pinterest posts tailored to your specific needs and audience.
                         </p>
                     </div>
 
@@ -68,37 +69,34 @@ export default function ContentGenenrationFlow(){
                     <div className="bg-white border border-gray-200 rounded-md p-6 mb-8">
                         <h2 className="text-xl font-bold mb-2">Enter Your Parameters</h2>
                         <p className="text-gray-600 text-sm mb-6">
-                            Fill in the details below to get customized Facebook post recommendations.
+                            Fill in the details below to get customized Pinterest post recommendations.
                         </p>
 
                         <div className="grid md:grid-cols-2 gap-6">
-                            {/* Post Goal */}
+                            {/* Pin Goal */}
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Post Goal</label>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Pin Goal</label>
                                 <div className="relative">
                                  <button
-                                   onClick={() => handleDropdownToggle('postGoal')}
+                                   onClick={() => handleDropdownToggle('PinGoal')}
                                    className="flex items-center justify-between w-full p-3 bg-white border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50">
-                                    <span className="text-gray-800">{formData.postGoal}</span>
+                                    <span className="text-gray-800">{formData.PinGoal}</span>
                                     <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
                                         </button>  
                         
-                                {dropdowns.postGoal && (
+                                {dropdowns.PinGoal && (
                                     <div className="absolute top-full left-0 z-10 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg">
                                         <ul className="py-1">
-                                            {['Engagement', 
-                                              'Awareness',
-                                              'Lead Generation',
-                                              'Website Traffic', 
-                                              'Conversions', 
-                                              'Brand Loyalty', 
-                                              'Community Building', 
-                                              'Product Promotion', 
-                                              'Event Promotion'].map((goal) => (
+                                            {['Drive Website Traffic', 
+                                              'Get Saves & Re-Pins', 
+                                              'Build Brand Presence', 
+                                              'Promote Affiliate Links', 
+                                              'Inspire DIY Projects', 
+                                              'Grow Email List'].map((goal) => (
                                                 <li
                                                 key={goal}
-                                                onClick={() => handleSelect('postGoal', goal)}
+                                                onClick={() => handleSelect('PinGoal', goal)}
                                                 className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
                                                 >
                                                     {goal}
@@ -128,22 +126,16 @@ export default function ContentGenenrationFlow(){
                                     {dropdowns.NicheIndustry && (
                                     <div className="absolute top-full left-0 z-10 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg">
                                         <ul className="py-1">
-                                            {['Business', 
-                                              'News', 
-                                              'Technology', 
-                                              'Lifestyle', 
-                                              'Health & Wellness', 
-                                              'Finance', 
-                                              'Education', 
-                                              'Travel', 
-                                              'Food & Beverage', 
-                                              'Sports', 
-                                              'Entertainment', 
-                                              'Real Estate', 
-                                              'Fashion & Beauty', 
-                                              'Parenting', 
-                                              'Non-Profit / Causes']
-                                                .map((goal) => (
+                                            {['Home Decor', 
+                                              'DIY & Crafts', 
+                                              'Beauty & Skincare', 
+                                              'Fitness Routines', 
+                                              'Fashion & Outfits', 
+                                              'Wedding Planning', 
+                                              'Meal Prep & Recipes', 
+                                              'Parenting Tips', 
+                                              'Digital Products', 
+                                              'Small Business'].map((goal) => (
                                                 <li
                                                 key={goal}
                                                 onClick={() => handleSelect('NicheIndustry', goal)}
@@ -161,32 +153,30 @@ export default function ContentGenenrationFlow(){
                                 </p>
                             </div>
 
-                            {/* Post Type */}
+                            {/* Pin Type */}
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Post Type</label>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Pin Type</label>
                                 <div className="relative">
                                 <button
-                                   onClick={() => handleDropdownToggle('PostType')}
+                                   onClick={() => handleDropdownToggle('PinType')}
                                    className="flex items-center justify-between w-full p-3 bg-white border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50">
-                                    <span className="text-gray-800">{formData.PostType}</span>
+                                    <span className="text-gray-800">{formData.PinType}</span>
                                     <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
                                         </button>  
 
-                                    {dropdowns.PostType && (
+                                    {dropdowns.PinType && (
                                     <div className="absolute top-full left-0 z-10 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg">
                                         <ul className="py-1">
-                                            {['Text Post', 
-                                              'Image Post', 
-                                              'Video Post', 
-                                              'Story', 
-                                              'Live Stream', 
-                                              'Link Post', 
-                                              'Event', 
-                                              'Poll / Question'].map((goal) => (
+                                            {['Single Image Pin', 
+                                              'Video Pin', 
+                                              'Infographic / Guide', 
+                                              'Carousel / Multi-Image Pin', 
+                                              'Story Pin (Idea Pin)', 
+                                              'Step-by-Step Tutorial Pin'].map((goal) => (
                                                 <li
                                                 key={goal}
-                                                onClick={() => handleSelect('PostType', goal)}
+                                                onClick={() => handleSelect('PinType', goal)}
                                                 className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
                                                 >
                                                     {goal}
@@ -214,14 +204,13 @@ export default function ContentGenenrationFlow(){
                                     {dropdowns.ToneStyle && (
                                     <div className="absolute top-full left-0 z-10 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg">
                                         <ul className="py-1">
-                                            {['Informative', 
-                                              'Emotional', 
-                                              'Storytelling', 
-                                              'Relatable', 
-                                              'Funny', 
-                                              'Professional', 
-                                              'Casual', 
-                                              'Inspirational'].map((goal) => (
+                                            {['Clean & Aesthetic', 
+                                              'Minimalist & Neutral', 
+                                              'Step-by-Step Visual Guide', 
+                                              'Bright & Bold', 
+                                              'Elegant & Professional', 
+                                              'Warm & Cozy', 
+                                              'Infographic-Based'].map((goal) => (
                                                 <li
                                                 key={goal}
                                                 onClick={() => handleSelect('ToneStyle', goal)}
@@ -289,17 +278,13 @@ export default function ContentGenenrationFlow(){
                                     {dropdowns.CTA && (
                                     <div className="absolute top-full left-0 z-10 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg">
                                         <ul className="py-1">
-                                            {['Like', 
-                                              'Share', 
-                                              'Comment', 
-                                              'Visit Website', 
-                                              'Join Group', 
-                                              'Sign Up', 
-                                              'Send Message', 
-                                              'Learn More', 
+                                            {['Click to Read More', 
+                                              'Save This Idea', 
                                               'Shop Now', 
-                                              'Watch More', 
-                                              'RSVP'].map((goal) => (
+                                              'Download Freebie', 
+                                              'Try This Look', 
+                                              'Visit Website', 
+                                              'Get the Recipe'].map((goal) => (
                                                 <li
                                                 key={goal}
                                                 onClick={() => handleSelect('CTA', goal)}
@@ -330,23 +315,15 @@ export default function ContentGenenrationFlow(){
                                     {dropdowns.TargetAudiance && (
                                     <div className="absolute top-full left-0 z-10 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg">
                                         <ul className="py-1">
-                                            {[
-                                                'Gen Z (13-24)',
-                                                'Millennials (25-40)',
-                                                'Gen X (41-56)',
-                                                'Teenagers (13-19)',
-                                                'Young Adults (20-29)',
-                                                'Adults (30-45)',
-                                                'Middle-aged Adults (45-60)',
-                                                'Parents',
-                                                'College Students',
-                                                'Working Professionals',
-                                                'Travel Enthusiasts',
-                                                'Fitness Buffs',
-                                                'Tech Lovers',
-                                                'Fashion Enthusiasts',
-                                                'Foodies'
-                                                ].map((goal) => (
+                                            {['Teens (13–19)', 
+                                              'Gen Z (18–25)', 
+                                              'Millennials (25–35)', 
+                                              'Moms of TikTok', 
+                                              'Small Business Owners', 
+                                              'DIY Creators', 
+                                              'Pet Lovers', 
+                                              'Beauty Enthusiasts', 
+                                              'Fitness Junkies'].map((goal) => (
                                                 <li
                                                 key={goal}
                                                 onClick={() => handleSelect('TargetAudiance', goal)}
@@ -367,14 +344,14 @@ export default function ContentGenenrationFlow(){
                             {/* Topics & Keywords */}
                             <div className="md:col-span-2">
                                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                                    Topics & Keywords
+                                      Search Keywords
                                 </label>
                                 <textarea
                                     className="w-full p-3 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 h-24 resize-none"
                                     placeholder="Enter topics or keywords separated by commas"
                                     defaultValue="business"
                                 ></textarea>
-                                <p className="mt-1 text-xs text-gray-500">What specific topics do you want to cover?</p>
+                                <p className="mt-1 text-xs text-gray-500">What Search Keywords do you want to cover?</p>
                             </div>
                         </div>
 
