@@ -46,24 +46,49 @@ const Header = () => {
 
                                       {isOpen && (
                                         <div className="absolute left-0 top-full mt-2 w-48 bg-white shadow-lg rounded-md z-10 flex flex-col">
+                                          
                                           <Link to="/ContentGenerationFlow"
                                             className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
                                             onClick={() => setIsOpen(false)} // close dropdown after click
                                           >
                                             Facebook Optimizer
                                           </Link>
-                                          <Link to="/ContentGenerationFlow"
+
+                                          <Link to="/ContentGenerationInstagram"
                                             className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
                                             onClick={() => setIsOpen(false)}
                                           >
                                             Instagram Optimizer
                                           </Link>
-                                          <Link to="/ContentGenerationFlow"
+
+                                          <Link to="/ContentGenerationSnapchat"
                                             className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
                                             onClick={() => setIsOpen(false)}
                                           >
                                             Snapchat Optimizer
                                           </Link>
+
+                                          <Link to="/ContentGenerationYouTube"
+                                            className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                                            onClick={() => setIsOpen(false)}
+                                          >
+                                            Youtube Optimizer
+                                          </Link>
+
+                                          <Link to="/ContentGenerationTikTok"
+                                            className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                                            onClick={() => setIsOpen(false)}
+                                          >
+                                            TikTok Optimizer
+                                          </Link>
+
+                                          <Link to="/ContentGenerationPinterest"
+                                            className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                                            onClick={() => setIsOpen(false)}
+                                          >
+                                            Pinterest Optimizer
+                                          </Link>
+
                                         </div>
                                       )}
                                     </div>
