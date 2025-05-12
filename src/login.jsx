@@ -25,6 +25,10 @@ export default function Login() {
     alert("Logged in as Guest!");
   };
 
+  const handleFacebookLogin = () => {
+    window.location.href = "http://localhost:5000/api/auth/facebook";
+  };
+
   const handleGoogleLogin = () => {
     window.location.href = "http://localhost:5000/api/auth/google";
   };
@@ -83,7 +87,7 @@ export default function Login() {
           <p className="text-center text-gray-400">Or continue with</p>
 
           <div className="flex justify-center space-x-4">
-            <button className="flex items-center px-4 py-2 border rounded hover:bg-gray-100">
+            <button onClick={handleFacebookLogin} className="flex items-center px-4 py-2 border rounded hover:bg-gray-100">
               <FaFacebook className="mr-2" /> Facebook
             </button>
             <button onClick={handleGoogleLogin} className="flex items-center px-4 py-2 border rounded hover:bg-gray-100">
