@@ -2,6 +2,26 @@ import React from "react"
 import { useState } from 'react';
 
 export default function ContentGenerationSnapchat(){
+
+    const [keywords, setKeywords] = useState([]);
+        const [inputValue, setInputValue] = useState('');
+    
+        const handleKeyDown = (e) => {
+            if ((e.key === 'Enter' || e.key === ',') && inputValue.trim()) {
+                e.preventDefault();
+                const newKeyword = inputValue.trim().replace(/,$/, '');
+                if (!keywords.includes(newKeyword)) {
+                    setKeywords([...keywords, newKeyword]);
+                }
+                setInputValue('');
+            }
+        };
+    
+        const handleRemove = (indexToRemove) => {
+            setKeywords(keywords.filter((_, index) => index !== indexToRemove));
+        };
+
+
         const [formData, setFormData] = useState({
             SnapGoal: 'Storytelling',
             NicheIndustry: 'Events',
@@ -352,12 +372,40 @@ export default function ContentGenerationSnapchat(){
                                 <label className="block text-sm font-medium text-gray-700 mb-1">
                                    Stickers & Filters
                                 </label>
-                                <textarea
+                                {/* <textarea
                                     className="w-full p-3 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 h-24 resize-none"
                                     placeholder="Enter topics or keywords separated by commas"
                                     defaultValue="business"
-                                ></textarea>
+                                ></textarea> */}
+
+
+                            <div className="flex flex-wrap items-center gap-2 p-2 bg-white border border-gray-300 rounded-md min-h-[3rem]">
+                                            {keywords.map((keyword, index) => (
+                                                <div
+                                                    key={index}
+                                                    className="flex items-center bg-teal-100 text-teal-800 px-2 py-1 rounded-full text-sm"
+                                                >
+                                                    {keyword}
+                                                    <button
+                                                        onClick={() => handleRemove(index)}
+                                                        className="ml-2 text-teal-700 hover:text-red-500"
+                                                    >
+                                                        &times;
+                                                    </button>
+                                                </div>
+                                            ))}
+                                            <input
+                                                className="flex-grow focus:outline-none text-sm p-1 min-w-[120px]"
+                                                placeholder="Type and press Enter or comma"
+                                                value={inputValue}
+                                                onChange={(e) => setInputValue(e.target.value)}
+                                                onKeyDown={handleKeyDown}
+                                            />
+                                        </div>
+
+
                                 <p className="mt-1 text-xs text-gray-500">What specific topics do you want to cover?</p>
+                                <input type="hidden" name="keywords" value={JSON.stringify(keywords)} />
                             </div>
                         </div>
 
