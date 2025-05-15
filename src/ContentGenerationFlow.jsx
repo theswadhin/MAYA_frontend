@@ -392,12 +392,6 @@ export default function ContentGenenrationFlow(){
                                 <label className="block text-sm font-medium text-gray-700 mb-1">
                                     Topics & Keywords
                                 </label>
-                                 {/* <textarea
-                                    className="w-full p-3 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 h-24 resize-none"
-                                    placeholder="Enter topics or keywords separated by commas"
-                                    defaultValue="business"
-                                ></textarea> */}
-
                             <div className="flex flex-wrap items-center gap-2 p-2 bg-white border border-gray-300 rounded-md min-h-[3rem]">
                                             {keywords.map((keyword, index) => (
                                                 <div
