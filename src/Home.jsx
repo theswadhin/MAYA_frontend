@@ -1,6 +1,57 @@
-import React from 'react';
-
+import {React, useState} from 'react';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 export default function Home() {
+
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
+
+    const handdleSendMessageOnClick = async (event) => {
+        console.log("Name: ", name);
+        console.log("Email: ", email);
+        console.log("Message: ", message);
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        event.preventDefault(); // Prevent the default form submission behavior
+        if (!emailRegex.test(email)) {
+            toast.error('Please enter a valid email address.');
+            return;}
+        try {
+            const response = await axios.post('http://localhost:9090/contact/addContactMessages', {
+              name,
+              email,
+              message,
+            });
+        
+            console.log('Success:', response.data);
+            toast.success('Thank you for contacting US , Your Message has been sent successfully!');
+        
+            // Reset form
+            setName('');
+            setEmail('');
+            setMessage('');
+          } catch (error) {
+            if (axios.isAxiosError(error)) {
+                console.error('Axios error:', error.response?.data || error.message);
+                toast.error('Failed to send message. Please try again.');
+              } else {
+                console.error('Unexpected error:', error);
+                toast.error('Failed to send message. Please try again.');
+              }}
+          
+    }
+    
+    const handleSendNameChange = (e) => {
+        setName(e.target.value);
+    }
+    const handleSendEmailChange = (e) => {
+        setEmail(e.target.value);
+    }
+    const handleSendMessageChange = (e) => {
+        setMessage(e.target.value);
+    }
+
+
   return (
     <div id="home" className="pt-24 flex flex-col items-center px-6 py-12 space-y-24">
       {/* main Section */}
@@ -207,26 +258,33 @@ export default function Home() {
             Have questions or feedback? We'd love to hear from you! Reach out to us anytime.
             </p>
         </div>
-        <form className="mt-8 space-y-6 w-full max-w-md">
+        <form className="mt-8 space-y-6 w-full max-w-md" id = "contact-form" onSubmit={handdleSendMessageOnClick}>
             <input
             type="text"
             placeholder="Your Name"
+            value={name}
+            onChange={handleSendNameChange}
             className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-600"
             required
             />
             <input
             type="email"
             placeholder="Your Email"
+            value={email}
+            onChange={handleSendEmailChange}
             className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-600"
             required
             />
             <textarea
             rows="4"
             placeholder="Your Message"
+            value={message}
+            onChange={handleSendMessageChange}
             className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-600"
             required
             ></textarea>
-            <button className="w-full px-6 py-3 bg-teal-600 text-white rounded-lg font-semibold hover:bg-teal-700">
+            <button className="w-full px-6 py-3 bg-teal-600 text-white rounded-lg font-semibold hover:bg-teal-700"
+            type="submit">
             Send Message
             </button>   
             </form>
