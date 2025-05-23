@@ -11,12 +11,20 @@ export default function Login() {
 
   const handleLogin = async () => {
     try {
-      const res = await axios.post("http://localhost:5000/api/login", form);
-      alert("Login Successful!");
-      console.log(res.data);
+      const response = await axios.post("http://localhost:5000/api/login", form);
+
+      const data = await response.json();
+
+      if (response.ok && data.token) {
+        sessionStorage.setItem('token', data.token);
+        alert("Login Successful!");
+        navigate('/');
+      } else {
+        setError(data.message || 'Login failed');
+      }
     } catch (err) {
-      alert("Login Failed");
-      console.error(err);
+      console.error('Login error:', err);
+      setError('Server error. Please try again later.');
     }
   };
 

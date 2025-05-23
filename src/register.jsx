@@ -8,10 +8,23 @@ export default function Register() {
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    validateForm();
+  };
+
+  const validateForm = () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const passwordRegex = /^.{6,}$/;
+    const nameRegex = /^[a-zA-Z ]+$/;
+    if (!nameRegex.test(form.username)) return 'Invalid name';
+    if (!emailRegex.test(form.email)) return 'Invalid email';
+    if (!passwordRegex.test(form.password)) return 'Password must be at least 6 characters';
+    return '';
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const errorMsg = validateForm();
+    if (errorMsg) return setError(errorMsg);
     try {
       await axios.post("http://localhost:5000/api/register", form);
       alert("Registration successful");
