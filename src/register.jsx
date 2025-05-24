@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from 'react-toastify';
 
 export default function Register() {
-  const [form, setForm] = useState({ username: "", email: "", password: "" });
+  const [error, setError] = useState('');
+  const [form, setForm] = useState({ name: "", email: "", password: "" , role: "USER"});
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -15,22 +17,30 @@ export default function Register() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const passwordRegex = /^.{6,}$/;
     const nameRegex = /^[a-zA-Z ]+$/;
-    if (!nameRegex.test(form.username)) return 'Invalid name';
+    const name = form.name?.trim();
+    if (!nameRegex.test(name)) return 'Invalid name';
     if (!emailRegex.test(form.email)) return 'Invalid email';
     if (!passwordRegex.test(form.password)) return 'Password must be at least 6 characters';
-    return '';
+    return false; // No error
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const errorMsg = validateForm();
-    if (errorMsg) return setError(errorMsg);
+    if (errorMsg){ //return setError(errorMsg);
+      toast.error(errorMsg); // Use toast for error messages
+      console.error(errorMsg); 
+      return;
+    }
+           
     try {
-      await axios.post("http://localhost:5000/api/register", form);
-      alert("Registration successful");
+      console.log("Form data:", form); // Debugging line to check form data
+      const response = await axios.post("http://localhost:9090/auth/registerUser", form);
+      toast.success('Your Registration has been successfully Done!');
+      console.log('Success:', response.data);
       navigate("/login");
     } catch (err) {
-      alert(err.response?.data?.message || "Registration failed");
+      toast.success(err.response?.data?.message || "Registration failed Please try again later.");
     }
   };
 
@@ -41,7 +51,7 @@ export default function Register() {
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
-            name="username"
+            name="name"
             placeholder="Username"
             className="w-full border p-2 rounded"
             onChange={handleChange}
