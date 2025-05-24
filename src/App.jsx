@@ -27,7 +27,7 @@ return (
         {/* Header always visible */}
         <Header />
 
-        <ToastContainer position="top-right" autoClose={3000} />
+        <ToastContainer position="top-right" autoClose={4000} />
 
         {/* Main content */}
         <main className="flex-grow">

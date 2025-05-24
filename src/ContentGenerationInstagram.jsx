@@ -1,5 +1,7 @@
 import React from "react"
 import { useState } from 'react';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 export default function ContentGenerationInstagram(){
 
@@ -49,6 +51,36 @@ export default function ContentGenerationInstagram(){
         const handleSelect = (field, value) => {
             setFormData((prev) => ({ ...prev, [field]: value }));
             setDropdowns((prev) => ({ ...prev, [field]: false }));
+        };
+
+        const handleGenerateResult =  async (e) => {
+            e.preventDefault();
+            // Handle the form submission logic here
+            console.log("Form Data:", formData);
+            console.log("Keywords:", keywords);
+            try {
+                const response = await axios.post('http://localhost:9090/api/content/instagram/insta_prime', {
+                    contentGoal: formData.ContentGoal,
+                    toneStyle: formData.ToneStyle,
+                    callToAction: formData.CTA,
+                    niche: formData.NicheIndustry,
+                    targetAudience: formData.TargetAudiance,
+                    keywords: keywords,
+                    trendingOrEvergreen: formData.TrendingorEvergreen,
+                    contentType: formData.ContentType,
+                });
+            
+                console.log('Success:', response.data);
+                toast.success('Your Recomendations has been successfully Generated!');
+        
+              } catch (error) {
+                if (axios.isAxiosError(error)) {
+                    console.error('Axios error:', error.response?.data || error.message);
+                    toast.error('Failed to Fetch Result. Please try again.');
+                  } else {
+                    console.error('Unexpected error:', error);
+                    toast.error('Failed to Fetch Result. Please try again.');
+                  }}
         };
 
 
@@ -411,7 +443,8 @@ export default function ContentGenerationInstagram(){
                             </div>
                         </div>
 
-                        <button className="w-full mt-8 py-3 bg-teal-600 hover:bg-teal-700 text-white font-medium rounded-md transition-colors transform hover:scale-[1.01] active:scale-[0.99]">
+                        <button className="w-full mt-8 py-3 bg-teal-600 hover:bg-teal-700 text-white font-medium rounded-md transition-colors transform hover:scale-[1.01] active:scale-[0.99]"
+                            onClick={handleGenerateResult}>
                             Generate Recommendations
                         </button>
                     </div>
