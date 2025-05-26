@@ -26,7 +26,7 @@ export default function Footer() {
           </a>
         </div>
 
-        <p className="text-xs text-gray-400">&copy; 2025 MAYA, Inc. All rights reserved.</p>
+        <p className="text-xs text-gray-400">&copy; {new Date().getFullYear()} MAYA, Inc. All rights reserved.</p>
       </div>
     </footer>
   );
