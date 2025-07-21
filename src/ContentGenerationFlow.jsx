@@ -2,10 +2,11 @@ import React from "react"
 import { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { getRoleFromToken } from "./tokenDecoder/detokenizer";
 
 export default function ContentGenenrationFlow(){
 
-
+    const token = sessionStorage.getItem('token');
     const [keywords, setKeywords] = useState([]);
     const [inputValue, setInputValue] = useState('');
 
@@ -54,13 +55,27 @@ export default function ContentGenenrationFlow(){
             setDropdowns((prev) => ({ ...prev, [field]: false }));
         };
 
+        const [postIdeas, setPostIdeas] = useState([]);
+        const [headlinesAndDes, setHeadlinesAndDes] = useState([]);
+        const [features, setFeatures] = useState([]);
+        const [hashtags, setHashtags] = useState([]);
+        const [boostingTips, setBoostingTips] = useState([]);
+        const [postingTimes, setPostingTimes] = useState([]);
+        const [loading, setLoading] = useState(false);
+
+        
+
         const handleGenerateResult =  async (e) => {
             e.preventDefault();
             // Handle the form submission logic here
             console.log("Form Data:", formData);
             console.log("Keywords:", keywords);
+            setLoading(true); // Show loading spinner
             try {
-                const response = await axios.post('http://localhost:9090/api/content/facebook/fb_prime', {
+                if(sessionStorage.getItem('token') === null) {toast.error('Unauthorized access. Either Register or Continue as a Guest To Access the resource.');
+                    return;
+                }
+                const response = await axios.post('https://maya-backend-service-326007673689.us-central1.run.app/api/content/facebook/fb_prime', {
                     postGoal: formData.postGoal,
                     niche: formData.NicheIndustry,
                     postType: formData.PostType,
@@ -69,19 +84,42 @@ export default function ContentGenenrationFlow(){
                     contentType: formData.ContentType,
                     topicsAndKeywords: keywords,
                     callToAction: formData.CTA,
-                });
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`, // Include the token in the request headers
+                    },
+                }
+            );
             
                 console.log('Success:', response.data);
+                setPostIdeas(response.data.facebookData.postIdeasList.postIdeas);
+                setHeadlinesAndDes(response.data.facebookData.headlinesAndDesList.headlinesAndDes);
+                setFeatures(response.data.facebookData.engagementFeatureList.features);
+                setHashtags(response.data.facebookData.hashtagsList.hashtags);
+                setBoostingTips(response.data.facebookData.adAndBoostingList.boostingTips);
+                setPostingTimes(response.data.facebookData.postingTimeList.postingTimes);
+                setLoading(false); // Hide loading spinner
                 toast.success('Your Recomendations has been successfully Generated!');
         
               } catch (error) {
                 if (axios.isAxiosError(error)) {
+                    if (error.response && error.response.status === 401) {
+                    //toast.error('Unauthorized access. Free credit limit exceeded. Register for more credit');
+                    if(sessionStorage.getItem('token') === null) {toast.error('Unauthorized access. Either Register or Continue as a Guest To Access the resource.');}
+                    else if (getRoleFromToken(token) === 'GUEST') {toast.error('Unauthorized access. Free credit limit exceeded. Register for more credit');}
+                    else if (getRoleFromToken(token) === 'USER') {toast.error('Session expired. Please login again.');}
+                    }
                     console.error('Axios error:', error.response?.data || error.message);
-                    toast.error('Failed to Fetch Result. Please try again.');
+                    //toast.error('Failed to Fetch Result. Please try again.');
                   } else {
                     console.error('Unexpected error:', error);
                     toast.error('Failed to Fetch Result. Please try again.');
-                  }}
+                  }
+                }
+                  finally {
+                    setLoading(false);
+                  }
         };
 
 
@@ -111,7 +149,7 @@ export default function ContentGenenrationFlow(){
                         <button className="flex-1 py-3 bg-gray-50 hover:bg-gray-100 transition-colors text-gray-800 rounded-tl-md border-b-2 border-teal-500">
                             Input Parameters
                         </button>
-                        <button className="flex-1 py-3 bg-white hover:bg-gray-50 transition-colors text-gray-800 rounded-tr-md border-b border-gray-200">
+                        <button className="flex-1 py-3 bg-white hover:bg-gray-50 transition-colors text-gray-800 rounded-tr-md border-b border-gray-200" onClick={() => document.getElementById('results').scrollIntoView({ behavior: 'smooth' })}>
                             Results
                         </button>
                     </div>
@@ -458,7 +496,25 @@ export default function ContentGenenrationFlow(){
                         </button>
                     </div>
 
+                    {/* Loading Spinner */}
+                    {loading && (
+                            <div className="fixed inset-0 z-50 flex items-center justify-center bg-white bg-opacity-80">
+                            <div className="flex flex-col items-center justify-center p-8 bg-white rounded-2xl shadow-xl border border-teal-200">
+                              <img
+                                src="/MAYA_Panda_withoutBackground_withBase.png"
+                                alt="Loading mascot"
+                                className="w-48 h-48 mb-6 animate-pulse"
+                              />
+                              <p className="text-teal-700 text-xl font-semibold">
+                                Generating your awesome content ideas💡...
+                              </p>
+                            </div>
+                          </div>
+                            )}
+
+
                     {/* Results Section */}
+                    <section id="results">
                     <div className="bg-white border border-gray-200 rounded-md mb-12">
                         <details className="group" open>
                             <summary className="flex items-center justify-between p-5 cursor-pointer focus:outline-none">
@@ -497,37 +553,33 @@ export default function ContentGenenrationFlow(){
                                 </svg>
                             </summary>
                             <div className="px-5 pb-5">
-                                <ul className="space-y-4">
-                                    <li className="flex items-start">
-                                        <div className="flex-shrink-0 flex items-center justify-center w-7 h-7 rounded-full bg-teal-600 text-white font-medium text-sm mr-3">
-                                            1
-                                        </div>
-                                        <p className="pt-0.5">10 ways to boost engagement in your Business business</p>
-                                    </li>
-                                    <li className="flex items-start">
-                                        <div className="flex-shrink-0 flex items-center justify-center w-7 h-7 rounded-full bg-teal-600 text-white font-medium text-sm mr-3">
-                                            2
-                                        </div>
-                                        <p className="pt-0.5">Breaking: New trends in Business you need to know</p>
-                                    </li>
-                                    <li className="flex items-start">
-                                        <div className="flex-shrink-0 flex items-center justify-center w-7 h-7 rounded-full bg-teal-600 text-white font-medium text-sm mr-3">
-                                            3
-                                        </div>
-                                        <p className="pt-0.5">
-                                            How our Business solution helped clients achieve results
-                                        </p>
-                                    </li>
-                                    <li className="flex items-start">
-                                        <div className="flex-shrink-0 flex items-center justify-center w-7 h-7 rounded-full bg-teal-600 text-white font-medium text-sm mr-3">
-                                            4
-                                        </div>
-                                        <p className="pt-0.5">
-                                            Behind the scenes: Our team's approach to Business challenges
-                                        </p>
-                                    </li>
-                                </ul>
-                            </div>
+                                    {postIdeas.length === 0 ? (
+                                    <p className="text-sm text-gray-500 italic">Loading ideas...</p>
+                                    ) : (
+                                    <ul className="space-y-6">
+                                        {postIdeas.map((idea, index) => (
+                                        <li
+                                            key={index}
+                                            className="border border-gray-200 rounded-lg p-4 shadow-sm bg-white"
+                                        >
+                                            <div className="flex items-center mb-2">
+                                            <div className="w-7 h-7 rounded-full bg-teal-600 text-white text-sm font-medium flex items-center justify-center mr-3">
+                                                {index + 1}
+                                            </div>
+                                            <h4 className="font-semibold text-md">{idea.postIdea}</h4>
+                                            </div>
+                                            <p className="text-sm text-gray-700 mb-2">
+                                            <span className="font-medium text-gray-600">Script:</span> {idea.script}
+                                            </p>
+                                            <p className="text-sm text-gray-700 italic">
+                                            <span className="font-medium not-italic text-gray-600">Why this works:</span>{' '}
+                                            {idea.whyThisWorks}
+                                            </p>
+                                        </li>
+                                        ))}
+                                    </ul>
+                                    )}
+                                </div>
                         </details>
 
                         <details className="group border-t border-gray-200" open>
@@ -566,20 +618,23 @@ export default function ContentGenenrationFlow(){
                                     ></path>
                                 </svg>
                             </summary>
-                            <div className="px-5 pb-5">
-                                <div className="mb-4">
+                            <div className="px-5 pb-5 space-y-6">
+                            {headlinesAndDes.length === 0 ? (
+                                <p className="text-sm text-gray-500 italic">No headlines found.</p>
+                            ) : (
+                                headlinesAndDes.map((item, index) => (
+                                <div key={index} className="border border-gray-200 rounded-lg p-4 shadow-sm bg-white">
+                                    <div className="mb-3">
                                     <p className="text-sm font-medium text-gray-700 mb-1">Headline:</p>
-                                    <p className="font-medium">
-                                        Transform Your Business Strategy With These Proven Tips
-                                    </p>
-                                </div>
-                                <div>
+                                    <p className="font-medium">{item.headlines}</p>
+                                    </div>
+                                    <div>
                                     <p className="text-sm font-medium text-gray-700 mb-1">Description:</p>
-                                    <p className="text-gray-600">
-                                        Discover how our approach to Business can help you achieve your Engagement goals
-                                        faster and more effectively.
-                                    </p>
+                                    <p className="text-gray-600">{item.description}</p>
+                                    </div>
                                 </div>
+                                ))
+                            )}
                             </div>
                         </details>
 
@@ -621,26 +676,20 @@ export default function ContentGenenrationFlow(){
                             </summary>
                             <div className="px-5 pb-5">
                                 <div className="flex flex-wrap gap-2">
-                                    <span className="px-3 py-1 bg-teal-50 text-teal-700 rounded-full text-sm hover:bg-teal-100 transition-colors cursor-pointer">
-                                        #Business
-                                    </span>
-                                    <span className="px-3 py-1 bg-teal-50 text-teal-700 rounded-full text-sm hover:bg-teal-100 transition-colors cursor-pointer">
-                                        #Engagement
-                                    </span>
-                                    <span className="px-3 py-1 bg-teal-50 text-teal-700 rounded-full text-sm hover:bg-teal-100 transition-colors cursor-pointer">
-                                        #SocialMediaTips
-                                    </span>
-                                    <span className="px-3 py-1 bg-teal-50 text-teal-700 rounded-full text-sm hover:bg-teal-100 transition-colors cursor-pointer">
-                                        #FacebookMarketing
-                                    </span>
-                                    <span className="px-3 py-1 bg-teal-50 text-teal-700 rounded-full text-sm hover:bg-teal-100 transition-colors cursor-pointer">
-                                        #Video
-                                    </span>
-                                    <span className="px-3 py-1 bg-teal-50 text-teal-700 rounded-full text-sm hover:bg-teal-100 transition-colors cursor-pointer">
-                                        #MAYA
-                                    </span>
+                                    {hashtags.length === 0 ? (
+                                    <p className="text-sm text-gray-500 italic">No hashtags found.</p>
+                                    ) : (
+                                    hashtags.map((tag, index) => (
+                                        <span
+                                        key={index}
+                                        className="px-3 py-1 bg-teal-50 text-teal-700 rounded-full text-sm hover:bg-teal-100 transition-colors cursor-pointer"
+                                        >
+                                        {tag.hashtag}
+                                        </span>
+                                    ))
+                                    )}
                                 </div>
-                            </div>
+                                </div>
                         </details>
 
                         <details className="group border-t border-gray-200" open>
@@ -681,36 +730,20 @@ export default function ContentGenenrationFlow(){
                             </summary>
                             <div className="px-5 pb-5">
                                 <ul className="space-y-4">
-                                    <li className="flex items-start">
+                                    {features.length === 0 ? (
+                                    <p className="text-sm text-gray-500 italic">No features found.</p>
+                                    ) : (
+                                    features.map((feature, index) => (
+                                        <li key={index} className="flex items-start">
                                         <div className="flex-shrink-0 flex items-center justify-center w-7 h-7 rounded-full bg-teal-600 text-white font-medium text-sm mr-3">
-                                            1
+                                            {index + 1}
                                         </div>
-                                        <p className="pt-0.5">
-                                            Create a poll asking users about their biggest Business challenges
-                                        </p>
-                                    </li>
-                                    <li className="flex items-start">
-                                        <div className="flex-shrink-0 flex items-center justify-center w-7 h-7 rounded-full bg-teal-600 text-white font-medium text-sm mr-3">
-                                            2
-                                        </div>
-                                        <p className="pt-0.5">Add a quiz to test knowledge about Business trends</p>
-                                    </li>
-                                    <li className="flex items-start">
-                                        <div className="flex-shrink-0 flex items-center justify-center w-7 h-7 rounded-full bg-teal-600 text-white font-medium text-sm mr-3">
-                                            3
-                                        </div>
-                                        <p className="pt-0.5">Tag industry influencers to expand reach</p>
-                                    </li>
-                                    <li className="flex items-start">
-                                        <div className="flex-shrink-0 flex items-center justify-center w-7 h-7 rounded-full bg-teal-600 text-white font-medium text-sm mr-3">
-                                            4
-                                        </div>
-                                        <p className="pt-0.5">
-                                            Create a Facebook Group dedicated to Business discussions
-                                        </p>
-                                    </li>
+                                        <p className="pt-0.5">{feature.engagementFeatures}</p>
+                                        </li>
+                                    ))
+                                    )}
                                 </ul>
-                            </div>
+                                </div>
                         </details>
 
                         <details className="group border-t border-gray-200" open>
@@ -755,21 +788,26 @@ export default function ContentGenenrationFlow(){
                                     ></path>
                                 </svg>
                             </summary>
-                            <div className="px-5 pb-5">
-                                <div className="mb-4">
-                                    <p className="text-sm font-medium text-gray-700 mb-1">Recommended Ad Format:</p>
-                                    <p className="font-medium">Carousel Ad</p>
+                            <div className="px-5 pb-5 space-y-6">
+                                {boostingTips.length === 0 ? (
+                                    <p className="text-sm text-gray-500 italic">No boosting tips found.</p>
+                                ) : (
+                                    boostingTips.map((item, index) => (
+                                    <div key={index} className="border border-gray-200 rounded-lg p-4 shadow-sm bg-white">
+                                        <div className="mb-4">
+                                        <p className="text-sm font-medium text-gray-700 mb-1">Recommended Ad Format:</p>
+                                        <p className="font-medium">{item.adFormat}</p>
+                                        </div>
+                                        <div>
+                                        <p className="text-sm font-medium text-gray-700 mb-2">Boosting Tips:</p>
+                                        <ul className="list-disc pl-5 space-y-2 text-gray-600">
+                                            <li>{item.boosting}</li>
+                                        </ul>
+                                        </div>
+                                    </div>
+                                    ))
+                                )}
                                 </div>
-                                <div>
-                                    <p className="text-sm font-medium text-gray-700 mb-2">Boosting Tips:</p>
-                                    <ul className="list-disc pl-5 space-y-2 text-gray-600">
-                                        <li>Target users with interests in Business</li>
-                                        <li>Use custom audiences based on website visitors</li>
-                                        <li>Set a modest initial budget and scale based on performance</li>
-                                        <li>A/B test different ad creatives to optimize performance</li>
-                                    </ul>
-                                </div>
-                            </div>
                         </details>
 
                         <details className="group border-t border-gray-200" open>
@@ -809,31 +847,42 @@ export default function ContentGenenrationFlow(){
                                 </svg>
                             </summary>
                             <div className="px-5 pb-5">
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div className="bg-gray-50 p-4 rounded-md hover:bg-gray-100 transition-colors">
-                                        <div className="flex items-center mb-2">
-                                            <span className="flex items-center justify-center w-8 h-8 rounded-full bg-teal-100 text-teal-500 mr-3">
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    className="h-5 w-5"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    stroke="currentColor"
-                                                >
-                                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                                    ></path>
-                                                </svg>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {postingTimes.length === 0 ? (
+          <p className="text-sm text-gray-500 italic">No posting times available.</p>
+        ) : (
+          postingTimes.map((item, index) => (
+            <div
+              key={index}
+              className="bg-gray-50 p-4 rounded-md hover:bg-gray-100 transition-colors"
+            >
+              <div className="flex items-center mb-2">
+                <span className="flex items-center justify-center w-8 h-8 rounded-full bg-teal-100 text-teal-500 mr-3">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                </span>
+                <p className="text-gray-700 text-sm">{item.postingTime}</p>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+    </div>
                         </details>
                     </div>
+                    </section>
                 </main>
             </div>
         </div>

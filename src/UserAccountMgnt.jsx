@@ -1,6 +1,48 @@
 import React from "react"
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { getRoleFromToken, getUserIdFromToken } from "./tokenDecoder/detokenizer";
+import axios from "axios";
+import { useEffect } from "react";
 
 export default function UserAccountMgnt(){
+    const [error, setError] = React.useState(null);
+    const [userData, setUserData] = React.useState(null);
+     const navigate = useNavigate();
+    const handleLogout = () => {
+        // Clear session storage or perform logout logic
+        sessionStorage.removeItem('token');
+        toast.success("You have been logged out Successfully.");
+        navigate('/login'); // Redirect to login page
+        
+    }
+    const handleUserData = async () => {
+            const token = sessionStorage.getItem('token'); 
+        const userID = getUserIdFromToken(sessionStorage.getItem('token'));
+    try {
+      const response = await axios.get("https://maya-backend-service-326007673689.us-central1.run.app/auth/getUserById/"+userID,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`, // Include the token in the request headers
+                    },
+                } );
+
+      const data = response.data;
+
+      if (response.status === 200) {
+        console.log('User data fetched successfully:', data);
+        setUserData(data);
+      } else {
+        toast.error(data.message || 'fetching user data failed Please Refresh the page.');
+      }
+    } catch (err) {
+      console.error('User error:', err);
+      toast.error('An error occurred while fetching user data. Please refresh the page.');
+    }
+  };
+  // ✅ Fetch data only once on mount
+        useEffect(() => {handleUserData();}, []); // empty dependency array → only runs once
+
     return (
         <div id="UserAccountMgnt">
             <div className="min-h-screen bg-gray-50 font-sans pt-16">
@@ -15,7 +57,7 @@ export default function UserAccountMgnt(){
                                         <span className="material-symbols-outlined text-3xl">person</span>
                                     </div>
                                     <div>
-                                        <h2 className="text-xl font-semibold text-gray-800">John Doe</h2>
+                                        <h2 className="text-xl font-semibold text-gray-800">{userData?.name}</h2>
                                         <p className="text-sm text-gray-500">Premium Member</p>
                                     </div>
                                 </div>
@@ -48,6 +90,14 @@ export default function UserAccountMgnt(){
                                         <span className="material-symbols-outlined mr-3">help</span>
                                         Help & Support
                                     </a>
+                                    <a
+                                        href="#"
+                                        className="flex items-center p-3 rounded-md text-gray-600 hover:bg-gray-50 transition-colors"
+                                        onClick={handleLogout}
+                                    >
+                                        <span className="material-symbols-outlined mr-3">logout</span>
+                                        Logout
+                                    </a>
                                 </nav>
                             </div>
                         </div>
@@ -70,14 +120,14 @@ export default function UserAccountMgnt(){
                                             <label className="block text-sm font-medium text-gray-600 mb-1">
                                                 Username
                                             </label>
-                                            <div className="bg-gray-50 p-3 rounded-md text-gray-800">johndoe123</div>
+                                            <div className="bg-gray-50 p-3 rounded-md text-gray-800">{userData?.name|| "NA"}</div>
                                         </div>
                                         <div className="mb-4">
                                             <label className="block text-sm font-medium text-gray-600 mb-1">
                                                 Email Address
                                             </label>
                                             <div className="bg-gray-50 p-3 rounded-md text-gray-800">
-                                                johndoe@example.com
+                                                {userData?.email|| "NA"}
                                             </div>
                                         </div>
                                         <div className="mb-4">
@@ -93,23 +143,23 @@ export default function UserAccountMgnt(){
                                                 Joined Date
                                             </label>
                                             <div className="bg-gray-50 p-3 rounded-md text-gray-800">
-                                                October 15, 2023
+                                                {userData?.createdDate|| "NA"}
                                             </div>
                                         </div>
                                         <div className="mb-4">
                                             <label className="block text-sm font-medium text-gray-600 mb-1">
-                                                Last Login
+                                                Your Firstname
                                             </label>
                                             <div className="bg-gray-50 p-3 rounded-md text-gray-800">
-                                                Today at 9:45 AM
+                                                {userData?.firstname || "NA"}
                                             </div>
                                         </div>
                                         <div className="mb-4">
                                             <label className="block text-sm font-medium text-gray-600 mb-1">
-                                                Subscription Renewal
+                                                Your Lastname
                                             </label>
                                             <div className="bg-gray-50 p-3 rounded-md text-gray-800">
-                                                October 15, 2024
+                                                {userData?.lastname || "NA"}
                                             </div>
                                         </div>
                                     </div>
@@ -131,9 +181,9 @@ export default function UserAccountMgnt(){
                             </div>
 
                             {/* Previous Results Section */}
-                            <div id="previous-results" className="bg-white rounded-lg shadow-sm p-6">
+                            <div id="previous-results" className="bg-white rounded-lg shadow-sm p-6 pointer-events-none opacity-30">
                                 <div className="flex justify-between items-center mb-6">
-                                    <h2 className="text-2xl font-semibold text-gray-800">Previous Results</h2>
+                                    <h2 className="text-2xl font-semibold text-gray-800">Previous Results(coming soon)</h2>
                                     <div className="flex items-center">
                                         <div className="relative">
                                             <input
